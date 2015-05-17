@@ -106,26 +106,87 @@ describe("About Applying What We Have Learnt", function() {
 
   /*********************************************************************************/
   /* UNCOMMENT FOR EXTRA CREDIT */
-  /*
-  it("should find the largest prime factor of a composite number", function () {
+  function isPrime(n){
+    prime = true
+    for (var i = 2; i < n; i++) {
+      if (n % i == 0) {
+        prime = false;
+        break;
+      }
+    }
+    return prime;
+  }
+
+  function isComposite(n){
+    composite = false;
+    for (var i = 2; i < n; i++){
+      if (n % i == 0) {
+        composite = true;
+        break;
+      }
+    }
+    return composite;
+  }
+
+  function largestPrimeFactorComposite(composite){
+    if (isComposite(composite)){
+      for (var i = composite; i > 1; i--) {
+        if (isPrime(i)){
+          if (composite % i == 0){
+            return i;
+            break;
+          }
+        }
+      }
+    }  
+  } 
+
+  function nthPrime(n) {
+    primeCount = 1; // primeCount
+    loopCount = 1;
+    while (primeCount <= n) {
+      loopCount++;
+      if (isPrime(loopCount)){
+        primeCount++;
+      }
+    }
+    return loopCount;
+  }
+
+  it("should find the largest prime factor of a composite number", function () {    
+    expect(largestPrimeFactorComposite(44)).toBe(11)
+  });
+  function isPalindrome(number){
+    var length = number.toString().length / 2
+    return number.toString().slice(0, length) == number.toString().slice(-length).split('').reverse().join('')
+  }
+
+  function largestPalindrome(){
+    largest = 0;
+    for (var i = 999; i > 99; i--){
+      for (var j = 999; j > 99; j--){
+        var product = i * j;
+        if (isPalindrome(product))
+          if (product > largest)
+            largest = product;
+      }
+    }
+    return largest;
+  }
   
-  });
-
   it("should find the largest palindrome made from the product of two 3 digit numbers", function () {
-    
+    expect(largestPalindrome()).toBe(906609);
   });
-
+  /*
   it("should find the smallest number divisible by each of the numbers 1 to 20", function () {
       
-    
   });
 
   it("should find the difference between the sum of the squares and the square of the sums", function () {
     
   });
-
-  it("should find the 10001st prime", function () {
-
-  });
   */
+  it("should find the 10001st prime", function () {
+    //expect(nthPrime(10001)).toBe(104743);
+  });
 });
